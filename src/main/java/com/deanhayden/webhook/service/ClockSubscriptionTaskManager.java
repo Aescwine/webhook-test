@@ -12,17 +12,17 @@ import reactor.core.publisher.Mono;
 import java.util.concurrent.Future;
 
 @Service
-public class SubscriptionTaskManager {
+public class ClockSubscriptionTaskManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SubscriptionTaskManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClockSubscriptionTaskManager.class);
 
     private final ClockSubscriptionTaskRepository taskRepository;
     private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
-    private final SubscriptionWebClient subscriptionWebClient;
+    private final ClockSubscriptionWebClient subscriptionWebClient;
 
-    public SubscriptionTaskManager(ClockSubscriptionTaskRepository clockSubscriptionTaskRepository,
-                                   ThreadPoolTaskScheduler threadPoolTaskScheduler,
-                                   SubscriptionWebClient subscriptionWebClient) {
+    public ClockSubscriptionTaskManager(ClockSubscriptionTaskRepository clockSubscriptionTaskRepository,
+                                        ThreadPoolTaskScheduler threadPoolTaskScheduler,
+                                        ClockSubscriptionWebClient subscriptionWebClient) {
         this.taskRepository = clockSubscriptionTaskRepository;
         this.threadPoolTaskScheduler = threadPoolTaskScheduler;
         this.subscriptionWebClient = subscriptionWebClient;

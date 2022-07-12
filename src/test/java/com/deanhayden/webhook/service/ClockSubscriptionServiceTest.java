@@ -27,7 +27,7 @@ class ClockSubscriptionServiceTest {
     private ClockSubscriptionRepository clockSubscriptionRepository;
 
     @Mock
-    private SubscriptionTaskManager subscriptionTaskManager;
+    private ClockSubscriptionTaskManager subscriptionTaskManager;
 
     @BeforeEach
     void init() {

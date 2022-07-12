@@ -9,26 +9,26 @@ import reactor.core.publisher.Mono;
 public class ClockSubscriptionService {
 
     private final ClockSubscriptionRepository clockSubscriptionRepository;
-    private final SubscriptionTaskManager subscriptionTaskManager;
+    private final ClockSubscriptionTaskManager clockSubscriptionTaskManager;
 
     public ClockSubscriptionService(ClockSubscriptionRepository clockSubscriptionRepository,
-                                    SubscriptionTaskManager subscriptionTaskManager) {
+                                    ClockSubscriptionTaskManager clockSubscriptionTaskManager) {
         this.clockSubscriptionRepository = clockSubscriptionRepository;
-        this.subscriptionTaskManager = subscriptionTaskManager;
+        this.clockSubscriptionTaskManager = clockSubscriptionTaskManager;
     }
 
     public Mono<ClockSubscription> registerSubscription(ClockSubscription clockSubscription) {
         return clockSubscriptionRepository.saveClockSubscription(clockSubscription)
-                .doOnNext(subscriptionTaskManager::createSubscription);
+                .doOnNext(clockSubscriptionTaskManager::createSubscription);
     }
 
     public Mono<Void> removeSubscription(String url) {
-        return subscriptionTaskManager.cancelSubscription(url).doOnNext(
+        return clockSubscriptionTaskManager.cancelSubscription(url).doOnNext(
                 clockSubscriptionRepository::deleteClockSubscriptionByUrl).then();
     }
 
     public Mono<ClockSubscription> updateSubscriptionFrequency(ClockSubscription clockSubscription) {
         return clockSubscriptionRepository.updateClockSubscription(clockSubscription)
-                .doOnNext(subscriptionTaskManager::updateSubscription);
+                .doOnNext(clockSubscriptionTaskManager::updateSubscription);
     }
 }

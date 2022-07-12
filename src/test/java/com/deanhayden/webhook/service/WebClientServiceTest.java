@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 class WebClientServiceTest {
 
-    private SubscriptionWebClient subscriptionWebClient;
+    private ClockSubscriptionWebClient subscriptionWebClient;
 
     private MockWebServer mockWebServer;
 
@@ -28,7 +28,7 @@ class WebClientServiceTest {
         mockWebServer = new MockWebServer();
         webhookUrl = mockWebServer.url("/clockSubscriber");
 
-        subscriptionWebClient = new SubscriptionWebClient(WebClient.builder().baseUrl(webhookUrl.url().toString()).build());
+        subscriptionWebClient = new ClockSubscriptionWebClient(WebClient.builder().baseUrl(webhookUrl.url().toString()).build());
     }
 
     @Test

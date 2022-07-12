@@ -1,6 +1,5 @@
 package com.deanhayden.webhook.controller;
 
-import com.deanhayden.webhook.exception.SubscriptionError;
 import com.deanhayden.webhook.model.ClockSubscription;
 import com.deanhayden.webhook.service.ClockSubscriptionService;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -38,8 +38,9 @@ public class ClockSubscriptionController {
     }
 
     @DeleteMapping
-    public Mono<ResponseEntity<?>> deleteSubscription(@RequestBody ClockSubscription clockSubscription) {
-        return clockSubscriptionService.removeSubscription(clockSubscription.getUrl())
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSubscription(@RequestBody ClockSubscription clockSubscription) {
+        clockSubscriptionService.removeSubscription(clockSubscription.getUrl())
                 .map(r -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 }

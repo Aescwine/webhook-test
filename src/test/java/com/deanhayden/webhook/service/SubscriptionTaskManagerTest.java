@@ -28,7 +28,7 @@ class SubscriptionTaskManagerTest {
 
     private final ClockSubscription clockSubscription = new ClockSubscription(URL_FOR_TEST, Duration.ofSeconds(5));
 
-    private SubscriptionTaskManager subscriptionTaskManager;
+    private ClockSubscriptionTaskManager subscriptionTaskManager;
 
     @Mock
     private ClockSubscriptionTaskRepository taskRepository;
@@ -37,11 +37,11 @@ class SubscriptionTaskManagerTest {
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     @Mock
-    private SubscriptionWebClient subscriptionWebClient;
+    private ClockSubscriptionWebClient subscriptionWebClient;
 
     @BeforeEach
     void init() {
-        subscriptionTaskManager = new SubscriptionTaskManager(taskRepository, threadPoolTaskScheduler, subscriptionWebClient);
+        subscriptionTaskManager = new ClockSubscriptionTaskManager(taskRepository, threadPoolTaskScheduler, subscriptionWebClient);
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.deanhayden.webhook.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -12,13 +11,13 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 
 @Service
-public class SubscriptionWebClient {
+public class ClockSubscriptionWebClient {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SubscriptionWebClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClockSubscriptionWebClient.class);
 
     private final WebClient webClient;
 
-    public SubscriptionWebClient(WebClient webClient) {
+    public ClockSubscriptionWebClient(WebClient webClient) {
         this.webClient = webClient;
     }
 
