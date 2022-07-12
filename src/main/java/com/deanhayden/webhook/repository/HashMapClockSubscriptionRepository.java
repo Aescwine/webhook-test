@@ -35,7 +35,7 @@ public class HashMapClockSubscriptionRepository implements ClockSubscriptionRepo
                 "Subscription does not exist for URL"));
     }
 
-    public void deleteClockSubscriptionByUrl(String url) {
+    public Mono<Void> deleteClockSubscriptionByUrl(String url) {
         if (!subscriptions.containsKey(url)) {
             throw new SubscriptionException(
                     SubscriptionError.URL_NOT_REGISTERED_EXCEPTION,
@@ -43,6 +43,7 @@ public class HashMapClockSubscriptionRepository implements ClockSubscriptionRepo
         }
 
         subscriptions.remove(url);
+        return Mono.empty();
     }
 
     public Mono<ClockSubscription> getClockSubscriptionByUrl(String url) {

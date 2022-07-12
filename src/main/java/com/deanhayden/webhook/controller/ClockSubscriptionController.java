@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
@@ -38,9 +39,8 @@ public class ClockSubscriptionController {
     }
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSubscription(@RequestBody ClockSubscription clockSubscription) {
-        clockSubscriptionService.removeSubscription(clockSubscription.getUrl())
+    public Mono<ResponseEntity<Void>> deleteSubscription(@RequestBody ClockSubscription clockSubscription) {
+        return clockSubscriptionService.removeSubscription(clockSubscription.getUrl())
                 .map(r -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 }

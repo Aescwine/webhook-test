@@ -49,5 +49,5 @@ curl --location --request POST 'http://localhost:8080/clocks/subscriptions' \
 ### TODO
 
 - Better exception handling in ClockSubscriptionWebClient
-- Testing of threadPoolTaskScheduler task creation
+- Testing of threadPoolTaskScheduler task creation and execution
 - Better testing of edges cases i.e. validation

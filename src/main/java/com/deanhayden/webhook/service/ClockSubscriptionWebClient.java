@@ -36,9 +36,10 @@ public class ClockSubscriptionWebClient {
 
                         // TODO: handle these errors better
                         // TODO: disable task for webhook call after a specific number of failed requests
-                        return response.createException()
-                                .flatMap(Mono::error);
+                        return Mono.empty();
                     }
-                });
+                })
+                .doOnError(e -> LOG.error(String.format("Error occurred sending time to URL '%s'", url)))
+                .onErrorReturn(Mono.empty());
     }
 }

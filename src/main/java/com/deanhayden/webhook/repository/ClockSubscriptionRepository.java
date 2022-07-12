@@ -9,7 +9,7 @@ public interface ClockSubscriptionRepository {
 
     Mono<ClockSubscription> updateClockSubscription(ClockSubscription clockSubscription);
 
-    void deleteClockSubscriptionByUrl(String url);
+    Mono<Void> deleteClockSubscriptionByUrl(String url);
 
     Mono<ClockSubscription> getClockSubscriptionByUrl(String url);
 }

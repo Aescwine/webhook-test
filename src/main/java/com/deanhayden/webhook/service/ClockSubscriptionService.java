@@ -22,9 +22,9 @@ public class ClockSubscriptionService {
                 .doOnNext(clockSubscriptionTaskManager::createSubscription);
     }
 
-    public Mono<Void> removeSubscription(String url) {
-        return clockSubscriptionTaskManager.cancelSubscription(url).doOnNext(
-                clockSubscriptionRepository::deleteClockSubscriptionByUrl).then();
+    public Mono<String> removeSubscription(String url) {
+        return clockSubscriptionTaskManager.cancelSubscription(url)
+                .doOnNext(clockSubscriptionRepository::deleteClockSubscriptionByUrl);
     }
 
     public Mono<ClockSubscription> updateSubscriptionFrequency(ClockSubscription clockSubscription) {

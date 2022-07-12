@@ -36,23 +36,23 @@ class ClockSubscriptionControllerTest {
     @Test
     public void whenUnregisteringWebhook_shouldReturnNoContentStatus() {
         // given
-        ClockSubscription clockSubscription = new ClockSubscription("http://deletetesturl", null);
-
-        client.post()
+        WebTestClient.ResponseSpec postExchange = client.post()
                 .uri("/clocks/subscriptions")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(clockSubscription))
+                .body(BodyInserters.fromValue(new ClockSubscription("http://deletetesturl", Duration.ofSeconds(10))))
                 .exchange();
 
+        postExchange.expectStatus().isCreated();
+
         // when
-        WebTestClient.ResponseSpec exchange = client.method(HttpMethod.DELETE)
+        WebTestClient.ResponseSpec deleteExchange = client.method(HttpMethod.DELETE)
                 .uri("/clocks/subscriptions")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(clockSubscription))
+                .body(BodyInserters.fromValue(new ClockSubscription("http://deletetesturl", null)))
                 .exchange();
 
         // then
-        exchange.expectStatus().isNoContent();
+        deleteExchange.expectStatus().isNoContent();
     }
 
     @Test
@@ -60,20 +60,22 @@ class ClockSubscriptionControllerTest {
         // given
         ClockSubscription clockSubscription = new ClockSubscription("http://updatetesturl", Duration.ofSeconds(10));
 
-        client.post()
+        WebTestClient.ResponseSpec postExchange = client.post()
                 .uri("/clocks/subscriptions")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(clockSubscription))
                 .exchange();
 
+        postExchange.expectStatus().isCreated();
+
         // when
-        WebTestClient.ResponseSpec exchange = client.put()
+        WebTestClient.ResponseSpec updateExchange = client.put()
                 .uri("/clocks/subscriptions")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(clockSubscription))
                 .exchange();
 
         // then
-        exchange.expectStatus().isOk();
+        updateExchange.expectStatus().isOk();
     }
 }
