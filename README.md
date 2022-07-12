@@ -31,9 +31,9 @@ The service exposes three APIs for managing webhook subscriptions:
 }
 ```
 
-###
-Build project with `mvn clean install`
-Run application with `java -jar <path_to_jar>/webhook-0.0.1-SNAPSHOT.jar com.deanhayden.webhook.WebhookApplication`
+### Running the application
+- Build project with `mvn clean install`
+- Run application with `java -jar <path_to_jar>/webhook-0.0.1-SNAPSHOT.jar com.deanhayden.webhook.WebhookApplication`
 
 Example cURL for registering a webhook:
 
@@ -46,7 +46,7 @@ curl --location --request POST 'http://localhost:8080/clocks/subscriptions' \
 }'
 ```
 
-###TODO
+### TODO
 
 - Better exception handling in ClockSubscriptionWebClient
 - Testing of threadPoolTaskScheduler task creation
